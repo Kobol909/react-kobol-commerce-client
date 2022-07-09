@@ -14,7 +14,7 @@ import { selectCurrentUser } from '../../store/user/user.selector';
 
 import { BUTTON_TYPE_CLASSES } from '../button/Button.component';
 
-import defaultConfig, { jwt } from '../../utils/constants/constants';
+import { jwt } from '../../utils/constants/constants';
 
 import { FormContainer, PaymentButton, PaymentFormContainer } from './PaymentForm.styles';
 
@@ -49,7 +49,7 @@ const PaymentForm = () => {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-          name: currentUser ? currentUser.displayName : 'Fabien Campana'
+          name: currentUser ? currentUser.displayName : 'Gary Host'
         }
       }
     });
@@ -65,10 +65,6 @@ const PaymentForm = () => {
     }
   };
 
-  const logger = () => {
-    console.log(defaultConfig.stripe.publishableKey);
-  };
-
   return (
     <>
       <PaymentFormContainer>
@@ -79,8 +75,6 @@ const PaymentForm = () => {
           </PaymentButton>
         </FormContainer>
       </PaymentFormContainer>
-
-      <button onClick={logger}>CLICK TO LOG STRIPE KEY</button>
     </>
   );
 };
