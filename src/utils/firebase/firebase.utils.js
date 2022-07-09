@@ -20,6 +20,7 @@ import {
   query,
   getDocs
 } from 'firebase/firestore';
+
 import { firebaseConfig } from '../constants/constants';
 
 const firebaseApp = initializeApp(firebaseConfig); // eslint-disable-line no-unused-vars

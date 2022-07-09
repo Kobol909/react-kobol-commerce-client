@@ -8,9 +8,6 @@ export const checkUserSession = () => createAction(USER_ACTION_TYPES.CHECK_USER_
 export const googleSignInFirebaseStart = () =>
   createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_FIREBASE_START);
 
-export const googleSignInPassportStart = (user) =>
-  createAction(USER_ACTION_TYPES.GOOGLE_SIGN_IN_PASSPORT_START, user);
-
 export const emailSignInStart = (email, password) =>
   createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email, password });
 

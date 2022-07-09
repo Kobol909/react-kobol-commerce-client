@@ -21,11 +21,6 @@ import {
   signOutUser
 } from '../../utils/firebase/firebase.utils';
 
-import { jwt, google } from '../../utils/constants/constants';
-const { bearer } = jwt;
-const clientID = google.clientId;
-const clientSecret = google.clientSecret;
-
 // Firebase
 // ========
 /**
@@ -50,9 +45,6 @@ export function* signInWithGoogle() {
   try {
     const { user } = yield call(signInWithGooglePopup);
     yield call(getSnapshotFromUserAuth, user);
-
-    createOrUpdateUser(user);
-    console.log(user);
   } catch (error) {
     yield put(signInFailed(error));
   }
@@ -115,53 +107,9 @@ export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
   yield call(getSnapshotFromUserAuth, user, additionalDetails);
 }
 
-// Passport Google OAuth2.0
-// ========================
-/**
- * Sign in with Google Passport OAuth2
- *
- */
-//                                onGoogleSignInPassportStart()
-export function* signInWithGoogleOAuth() {
-  window.open('api/auth/google', '_self');
-}
-
-/**
- * Create or update user in MongoDB
- *
- */
-const createOrUpdateUser = (user) => {
-  const { displayName, email, uid } = user;
-  const username = displayName.split(' ').join('-');
-  const userId = uid;
-
-  axios
-    .post('api/auth/sign-in-with-google', {
-      headers: {
-        authorization: 'Bearer ' + `${bearer}`,
-        clientID: clientID,
-        clientSecret: clientSecret
-      },
-      data: {
-        username,
-        email,
-        userId
-      }
-    })
-    .catch((error) => {
-      console.log('createOrUpdateUser() saga error: ', error);
-      console.log('There was an error while creating or updating the user');
-    });
-};
-
 // Firebase Google Auth Flow
 export function* onGoogleSignInFirebaseStart() {
   yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_FIREBASE_START, signInWithGoogle);
-}
-
-// Passport OAuth2 Google Auth Flow
-export function* onGoogleSignInPassportStart() {
-  yield takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_PASSPORT_START, signInWithGoogleOAuth);
 }
 
 export function* onCheckUserSession() {
@@ -188,7 +136,6 @@ export function* userSagas() {
   yield all([
     call(onCheckUserSession),
     call(onGoogleSignInFirebaseStart),
-    call(onGoogleSignInPassportStart),
     call(onEmailSignInStart),
     call(onSignUpStart),
     call(onSignUpSuccess),
