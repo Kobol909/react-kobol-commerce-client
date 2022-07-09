@@ -1,5 +1,5 @@
 require('dotenv').config();
-const stripe = require('stripe')(`$process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY`);
+const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 const handler = async (event) => {
   console.log('event', event);
@@ -18,8 +18,6 @@ const handler = async (event) => {
       body: JSON.stringify({ paymentIntent })
     };
   } catch (error) {
-    console.log({ error });
-
     return {
       statusCode: 400,
       body: JSON.stringify({ error })
