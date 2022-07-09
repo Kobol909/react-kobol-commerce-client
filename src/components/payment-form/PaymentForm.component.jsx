@@ -80,7 +80,7 @@ const PaymentForm = () => {
         </FormContainer>
       </PaymentFormContainer>
 
-      <button onClick={logger}></button>
+      <button onClick={logger}>CLICK TO LOG STRIPE KEY</button>
     </>
   );
 };
