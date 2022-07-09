@@ -6,16 +6,13 @@
  *
  */
 import { useState } from 'react';
-import { CardElement, useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 
 import { selectCartTotal, selectCartItems } from '../../store/cart/cart.selector';
 import { selectCurrentUser } from '../../store/user/user.selector';
 
 import { BUTTON_TYPE_CLASSES } from '../button/Button.component';
-
-import defaultConfig from '../../utils/constants/constants';
 
 import { FormContainer, PaymentButton, PaymentFormContainer } from './PaymentForm.styles';
 
@@ -42,7 +39,7 @@ const PaymentForm = () => {
     }
     setIsProcessingPayment(true);
 
-    const response = await fetch('/.netlify/functions/create-payment-intent', {
+    const response = await fetch('../../../netlify/functions/create-payment-intent', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
