@@ -1,0 +1,20 @@
+[build]
+  command = "# no build command"
+  functions = "netlify/functions"  
+  publish = "."
+
+[dev]
+  # The path to your static content folder
+  publish = "." 
+  
+  # Boolean value that determines if Netlify Dev launches the local server address in your browser
+  autoLaunch = true 
+  
+  # To start an https server instead of an http one, configure a certificate and key files
+  # Path to the certificate file
+  certFile = "/cert.pem" 
+  # Path to the private key file
+  keyFile = "/key.pem" 
+
+  # Or "#static" to force a static server
+  framework = "create-react-app" 

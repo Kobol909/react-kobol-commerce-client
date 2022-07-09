@@ -14,6 +14,8 @@ import { selectCurrentUser } from '../../store/user/user.selector';
 
 import { BUTTON_TYPE_CLASSES } from '../button/Button.component';
 
+import { jwt } from '../../utils/constants/constants';
+
 import { FormContainer, PaymentButton, PaymentFormContainer } from './PaymentForm.styles';
 
 const PaymentForm = () => {
@@ -39,11 +41,13 @@ const PaymentForm = () => {
     }
     setIsProcessingPayment(true);
 
-    const response = await fetch('../../../netlify/functions/create-payment-intent', {
-      method: 'post',
+    const response = await fetch('/.netlify/functions/create-payment-intent', {
+      method: 'POST',
       headers: {
+        authorization: `Bearer ${jwt.bearer}`,
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({ amount: amount * 100 })
     }).then((res) => {
       return res.json();
     });
