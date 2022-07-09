@@ -14,7 +14,7 @@ import { selectCurrentUser } from '../../store/user/user.selector';
 
 import { BUTTON_TYPE_CLASSES } from '../button/Button.component';
 
-import { jwt } from '../../utils/constants/constants';
+import defaultConfig, { jwt } from '../../utils/constants/constants';
 
 import { FormContainer, PaymentButton, PaymentFormContainer } from './PaymentForm.styles';
 
@@ -65,15 +65,23 @@ const PaymentForm = () => {
     }
   };
 
+  const logger = () => {
+    console.log(defaultConfig.stripe.publishableKey);
+  };
+
   return (
-    <PaymentFormContainer>
-      <FormContainer onSubmit={paymentHandler}>
-        <CardElement />
-        <PaymentButton buttonType={BUTTON_TYPE_CLASSES.inverted} isLoading={isProcessingPayment}>
-          Pay Now
-        </PaymentButton>
-      </FormContainer>
-    </PaymentFormContainer>
+    <>
+      <PaymentFormContainer>
+        <FormContainer onSubmit={paymentHandler}>
+          <CardElement />
+          <PaymentButton buttonType={BUTTON_TYPE_CLASSES.inverted} isLoading={isProcessingPayment}>
+            Pay Now
+          </PaymentButton>
+        </FormContainer>
+      </PaymentFormContainer>
+
+      <button onClick={logger}></button>
+    </>
   );
 };
 export default PaymentForm;
