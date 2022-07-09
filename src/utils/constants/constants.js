@@ -6,10 +6,6 @@ const defaultConfig = {
     bearer: process.env.REACT_APP_JWT_TOKEN,
     secret: process.env.REACT_APP_JWT_SECRET
   },
-  google: {
-    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
-    clientSecret: process.env.REACT_APP_GOOGLE_CLIENT_SECRET
-  },
   firebaseConfig: {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
