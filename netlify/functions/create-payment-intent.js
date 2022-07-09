@@ -1,5 +1,5 @@
 require('dotenv').config();
-const stripe = require('stripe')(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+const stripe = require('stripe')(`$process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY`);
 
 const handler = async (event) => {
   console.log('event', event);
