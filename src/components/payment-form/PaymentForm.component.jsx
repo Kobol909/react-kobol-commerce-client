@@ -21,7 +21,7 @@ import { FormContainer, PaymentButton, PaymentFormContainer } from './PaymentFor
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const amount = useSelector(selectCartTotal) * 100;
+  const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
 
@@ -38,7 +38,7 @@ const PaymentForm = () => {
         authorization: `Bearer ${jwt.bearer}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ amount: amount })
+      body: JSON.stringify({ amount: amount * 100 })
     }).then((res) => {
       return res.json();
     });
