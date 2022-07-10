@@ -3,12 +3,10 @@ const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 const handler = async (event) => {
   try {
-    const { amount } = JSON.parse(event.body);
-
-    const roundedAmount = Math.round(amount * 100);
+    const { amount } = JSON.parse(Math.round(event.body * 100));
 
     const paymentIntent = await stripe.paymentIntents.create({
-      roundedAmount,
+      amount,
       currency: 'eur',
       payment_method_types: ['card']
     });
