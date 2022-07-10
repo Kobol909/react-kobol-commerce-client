@@ -40,7 +40,7 @@ const PaymentForm = () => {
       },
       body: JSON.stringify({ amount: amount * 100 })
     }).then((res) => {
-      console.log(res.json());
+      console.log(res);
       return res.json();
     });
 
