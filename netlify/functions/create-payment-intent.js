@@ -5,8 +5,10 @@ const handler = async (event) => {
   try {
     const { amount } = JSON.parse(event.body);
 
+    const roundedAmount = Math.round(amount * 100);
+
     const paymentIntent = await stripe.paymentIntents.create({
-      amount,
+      roundedAmount,
       currency: 'eur',
       payment_method_types: ['card']
     });
